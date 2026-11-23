@@ -1,0 +1,477 @@
+
+/* =================================
+   SIA TOKO HAMBALI - STYLESHEET
+   Tema warna merah dan biru
+================================= */
+
+:root {
+  --biru: #173b72;
+  --biru-gelap: #10294f;
+  --merah: #d62839;
+  --merah-gelap: #b51f2e;
+  --putih: #ffffff;
+  --latar: #f3f6fb;
+  --teks: #1e293b;
+  --abu: #64748b;
+  --garis: #e2e8f0;
+  --hijau: #15803d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--latar);
+  color: var(--teks);
+}
+
+/* HEADER */
+
+.topbar {
+  min-height: 72px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--putih);
+  background: linear-gradient(110deg, var(--biru), var(--merah));
+  box-shadow: 0 3px 12px rgba(0,0,0,.12);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.topbar small {
+  opacity: .85;
+}
+
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* LAYOUT */
+
+.app-layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background: var(--biru-gelap);
+  color: white;
+  padding: 20px 14px;
+}
+
+.brand {
+  padding: 8px 12px 22px;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+  margin-bottom: 18px;
+}
+
+.brand h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.brand p {
+  margin: 0;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nav-item {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,.12);
+  color: white;
+}
+
+.nav-item.active {
+  background: var(--merah);
+  color: white;
+  font-weight: bold;
+}
+
+/* KONTEN */
+
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 28px;
+}
+
+.page-heading {
+  margin-bottom: 24px;
+}
+
+.page-heading h1 {
+  margin: 0 0 7px;
+  color: var(--biru);
+  font-size: 27px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: var(--abu);
+}
+
+/* SECTION */
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+/* CARD */
+
+.card {
+  background: white;
+  padding: 22px;
+  margin-bottom: 22px;
+  border: 1px solid var(--garis);
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(15,23,42,.04);
+}
+
+.card h3 {
+  color: var(--biru);
+  margin: 0 0 18px;
+  font-size: 18px;
+}
+
+.card p {
+  line-height: 1.7;
+}
+
+/* DASHBOARD */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--garis);
+  border-top: 4px solid var(--merah);
+  box-shadow: 0 3px 12px rgba(15,23,42,.04);
+}
+
+.stat-card p {
+  margin: 0 0 12px;
+  color: var(--abu);
+  font-size: 13px;
+}
+
+.stat-card h2 {
+  margin: 0;
+  color: var(--biru);
+  font-size: 21px;
+}
+
+/* FORM */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  color: var(--teks);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 7px;
+  background: white;
+  color: var(--teks);
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--biru);
+  box-shadow: 0 0 0 3px rgba(23,59,114,.1);
+}
+
+/* BUTTON */
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover {
+  filter: brightness(.92);
+}
+
+.btn.primary {
+  background: var(--biru);
+  color: white;
+}
+
+.btn.danger,
+.btn-danger {
+  background: var(--merah);
+  color: white;
+}
+
+.btn-sm {
+  padding: 7px 10px;
+  margin: 3px;
+  font-size: 12px;
+}
+
+/* BADGE */
+
+.badge {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.badge.ok {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.badge.warn {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.topbar .badge {
+  margin-left: auto;
+  background: rgba(255,255,255,.17);
+  color: white;
+}
+
+/* TABEL */
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+  font-size: 13px;
+}
+
+th {
+  background: var(--biru);
+  color: white;
+  padding: 13px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--garis);
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* PETUNJUK */
+
+.card ol {
+  padding-left: 22px;
+  line-height: 2;
+}
+
+/* FOOTER */
+
+.footer {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--abu);
+  font-size: 12px;
+}
+
+/* RESPONSIVE TABLET */
+
+@media (max-width: 1000px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .content {
+    padding: 20px;
+  }
+}
+
+/* RESPONSIVE HP */
+
+@media (max-width: 700px) {
+  .topbar {
+    padding: 12px 15px;
+  }
+
+  .topbar h2 {
+    font-size: 16px;
+  }
+
+  .topbar small {
+    font-size: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .app-layout {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    bottom: 0;
+    width: 270px;
+    max-width: 85vw;
+    overflow-y: auto;
+    z-index: 30;
+    box-shadow: 5px 0 20px rgba(0,0,0,.2);
+  }
+
+  .sidebar.open {
+    display: block;
+  }
+
+  .content {
+    padding: 18px 13px;
+  }
+
+  .page-heading h1 {
+    font-size: 23px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 14px;
+  }
+
+  .stat-card h2 {
+    font-size: 16px;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-card p {
+    font-size: 11px;
+  }
+
+  .card {
+    padding: 15px;
+    border-radius: 9px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+
+  .btn {
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
