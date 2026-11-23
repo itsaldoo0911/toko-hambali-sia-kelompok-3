@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIA Toko Hambali | Kelompok 3</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <button id="menuToggle" class="menu-toggle" type="button">☰</button>
+    <div>
+      <h2>SIA Toko Hambali</h2>
+      <small>Sistem Informasi Akuntansi - Kelompok 3</small>
+    </div>
+    <span id="statusBadge" class="badge ok">TERSIMPAN</span>
+  </header>
+
+  <div class="app-layout">
+
+    <aside id="sidebar" class="sidebar">
+      <div class="brand">
+        <h2>TOKO HAMBALI</h2>
+        <p>Sistem Informasi Akuntansi</p>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-section="dashboard">Dashboard</button>
+        <button class="nav-item" data-section="produk">Master Barang</button>
+        <button class="nav-item" data-section="penjualan">Penjualan POS</button>
+        <button class="nav-item" data-section="pembelian">Pembelian</button>
+        <button class="nav-item" data-section="stok">Stok Opname</button>
+        <button class="nav-item" data-section="rusak">Barang Rusak & ED</button>
+        <button class="nav-item" data-section="kas">Kas & Prive</button>
+        <button class="nav-item" data-section="pajak">Rekap Pajak</button>
+        <button class="nav-item" data-section="laporan">Laporan Produk</button>
+        <button class="nav-item" data-section="petunjuk">Petunjuk</button>
+      </nav>
+    </aside>
+
+    <main class="content">
+
+      <div class="page-heading">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p id="pageSubtitle">Ringkasan keuangan dan operasional</p>
+      </div>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="section active">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <p>Total Penjualan</p>
+            <h2 id="statPenjualan">Rp0</h2>
+          </div>
+          <div class="stat-card">
+            <p>Harga Pokok Penjualan</p>
+            <h2 id="statHPP">Rp0</h2>
+          </div>
+          <div class="stat-card">
+            <p>Laba Kotor</p>
+            <h2 id="statLabaKotor">Rp0</h2>
+          </div>
+          <div class="stat-card">
+            <p>Laba Bersih</p>
+            <h2 id="statLabaBersih">Rp0</h2>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Selamat Datang di SIA Toko Hambali</h3>
+          <p>
+            Aplikasi ini digunakan untuk membantu pencatatan
+            persediaan barang, penjualan, pembelian, kas,
+            dan laporan toko.
+          </p>
+          <button class="btn primary" type="button"
+            onclick="bukaMenu('produk')">
+            Lihat Master Barang
+          </button>
+        </div>
+      </section>
+
+      <!-- MASTER BARANG -->
+      <section id="produk" class="section">
+        <div class="card">
+          <h3>Data Master Barang</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th><th>Nama Barang</th><th>Satuan</th>
+                  <th>Harga Jual</th><th>Harga Beli</th>
+                  <th>Stok</th><th>Min.</th><th>Status / Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="masterBarangBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PENJUALAN -->
+      <section id="penjualan" class="section">
+        <div class="card">
+          <h3>Form Penjualan</h3>
+          <form id="formPOS" class="form-grid">
+            <div class="form-group">
+              <label>Nomor Nota</label>
+              <input id="posNota" required placeholder="INV-001">
+            </div>
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input id="posTanggal" type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Barang</label>
+              <select id="posKode" required>
+                <option value="">Pilih barang...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Jumlah</label>
+              <input id="posQty" type="number" min="1" value="1" required>
+            </div>
+            <div class="form-group">
+              <label>Diskon (Rp)</label>
+              <input id="posDiskon" type="number" min="0" value="0">
+            </div>
+            <div class="form-group">
+              <label>Metode Pembayaran</label>
+              <select id="posMetode" required>
+                <option value="Tunai">Tunai</option>
+                <option value="Transfer">Transfer</option>
+                <option value="QRIS">QRIS</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <button class="btn primary" type="submit">Simpan Penjualan</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Riwayat Penjualan</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nota</th><th>Tanggal</th><th>Kode</th>
+                  <th>Barang</th><th>Qty</th><th>Harga</th>
+                  <th>Diskon</th><th>Total</th><th>Metode</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="penjualanBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PEMBELIAN -->
+      <section id="pembelian" class="section">
+        <div class="card">
+          <h3>Form Pembelian</h3>
+          <form id="formPembelian" class="form-grid">
+            <div class="form-group">
+              <label>Nomor Nota</label>
+              <input id="beliNota" required>
+            </div>
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input id="beliTanggal" type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Nama Pemasok</label>
+              <input id="beliPemasok" required>
+            </div>
+            <div class="form-group">
+              <label>Jenis Pembelian</label>
+              <select id="beliJenis">
+                <option value="Tunai">Tunai</option>
+                <option value="Kredit">Kredit</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Nilai Pembelian (Rp)</label>
+              <input id="beliNilai" type="number" min="1" required>
+            </div>
+            <div class="form-group">
+              <label>Metode Pembayaran</label>
+              <select id="beliMetode">
+                <option value="Tunai">Tunai</option>
+                <option value="Transfer">Transfer</option>
+                <option value="Kredit">Kredit</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Bukti Pembelian</label>
+              <select id="beliBukti">
+                <option value="Ya">Ada</option>
+                <option value="Tidak">Tidak ada</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <button class="btn primary" type="submit">Simpan Pembelian</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Riwayat Pembelian</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nota</th><th>Tanggal</th><th>Pemasok</th>
+                  <th>Jenis</th><th>Nilai</th><th>Metode</th>
+                  <th>Bukti</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="pembelianBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- STOK OPNAME -->
+      <section id="stok" class="section">
+        <div class="card">
+          <h3>Form Stok Opname</h3>
+          <form id="formStok" class="form-grid">
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input id="stokTanggal" type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Barang</label>
+              <select id="stokKode" required></select>
+            </div>
+            <div class="form-group">
+              <label>Stok Sistem</label>
+              <input id="stokSistem" type="number" min="0" required>
+            </div>
+            <div class="form-group">
+              <label>Stok Fisik</label>
+              <input id="stokFisik" type="number" min="0" required>
+            </div>
+            <div class="form-group full">
+              <label>Alasan Selisih</label>
+              <input id="stokAlasan" placeholder="Keterangan jika ada selisih">
+            </div>
+            <div class="form-group full">
+              <button class="btn primary" type="submit">Simpan Stok Opname</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Riwayat Stok Opname</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th><th>Kode</th><th>Barang</th>
+                  <th>Sistem</th><th>Fisik</th><th>Selisih</th>
+                  <th>Alasan</th><th>Status</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="stokBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- BARANG RUSAK -->
+      <section id="rusak" class="section">
+        <div class="card">
+          <h3>Form Barang Rusak / ED</h3>
+          <form id="formRusak" class="form-grid">
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input id="rusakTanggal" type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Barang</label>
+              <select id="rusakKode" required></select>
+            </div>
+            <div class="form-group">
+              <label>Jumlah</label>
+              <input id="rusakQty" type="number" min="1" value="1" required>
+            </div>
+            <div class="form-group">
+              <label>Alasan</label>
+              <select id="rusakAlasan" required>
+                <option value="Rusak">Rusak</option>
+                <option value="Kedaluwarsa">Kedaluwarsa</option>
+                <option value="Hilang">Hilang</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tanggal Kedaluwarsa</label>
+              <input id="rusakED" type="date">
+            </div>
+            <div class="form-group full">
+              <button class="btn primary" type="submit">Simpan Catatan</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Riwayat Barang Rusak & ED</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th><th>Kode</th><th>Barang</th>
+                  <th>Jumlah</th><th>Alasan</th><th>ED</th>
+                  <th>Nilai</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="rusakBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- KAS -->
+      <section id="kas" class="section">
+        <div class="card">
+          <h3>Form Kas & Prive</h3>
+          <form id="formKas" class="form-grid">
+            <div class="form-group">
+              <label>Tanggal</label>
+              <input id="kasTanggal" type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Jenis Transaksi</label>
+              <select id="kasJenis" required>
+                <option value="Penerimaan">Penerimaan</option>
+                <option value="Pengeluaran">Pengeluaran</option>
+                <option value="Prive">Prive</option>
+                <option value="Penerimaan Lain">Penerimaan Lain</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Keterangan</label>
+              <input id="kasKet" required>
+            </div>
+            <div class="form-group">
+              <label>Jumlah (Rp)</label>
+              <input id="kasJumlah" type="number" min="1" required>
+            </div>
+            <div class="form-group full">
+              <button class="btn primary" type="submit">Simpan Transaksi Kas</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Riwayat Kas & Prive</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tanggal</th><th>Jenis</th><th>Keterangan</th>
+                  <th>Jumlah</th><th>Akun</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="kasBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAJAK -->
+      <section id="pajak" class="section">
+        <div class="card">
+          <h3>Rekap Pajak</h3>
+          <p>Halaman ini disediakan untuk pengembangan pencatatan pajak toko.</p>
+          <p>Perhitungan pajak perlu disesuaikan dengan status dan ketentuan perpajakan usaha.</p>
+        </div>
+      </section>
+
+      <!-- LAPORAN -->
+      <section id="laporan" class="section">
+        <div class="card">
+          <h3>Laporan Penjualan Produk</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama Barang</th><th>Jumlah Terjual</th>
+                  <th>Total Penjualan</th><th>Kontribusi</th>
+                </tr>
+              </thead>
+              <tbody id="laporanBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- PETUNJUK -->
+      <section id="petunjuk" class="section">
+        <div class="card">
+          <h3>Petunjuk Penggunaan</h3>
+          <ol>
+            <li>Buka Master Barang untuk melihat dan menambah barang.</li>
+            <li>Gunakan Penjualan POS untuk mencatat penjualan.</li>
+            <li>Gunakan Pembelian untuk mencatat transaksi pemasok.</li>
+            <li>Gunakan Stok Opname untuk memperbarui stok fisik.</li>
+            <li>Catat barang rusak atau kedaluwarsa pada menu Rusak & ED.</li>
+            <li>Catat penerimaan, pengeluaran, dan prive pada menu Kas.</li>
+            <li>Lihat hasil penjualan pada menu Laporan Produk.</li>
+          </ol>
+          <button class="btn danger" type="button" onclick="resetData()">
+            Reset Data Simulasi
+          </button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        SIA Toko Hambali | Prototype Kelompok 3
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
